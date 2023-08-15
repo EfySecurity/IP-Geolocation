@@ -1,9 +1,4 @@
-try:
-    import requests
-except ImportError:
-    print("A biblioteca 'requests' não está instalada. Instale usando 'pip install requests'")
-    exit(1)
-
+import requests
 import socket
 
 def get_external_ip():
@@ -25,15 +20,18 @@ def get_ip_geolocation(ip_address):
     return data
 
 def main():
-    use_own_ip = input("Deseja usar o seu próprio endereço IP? (S/N): ").lower()
-    
-    if use_own_ip == "s":
+    option = input("Escolha uma opção:\n1 - Usar meu IP público\n2 - Inserir manualmente um endereço IP\nDigite o número da opção: ")
+
+    if option == "1":
         ip_address = get_external_ip()
         if ip_address is None:
             print("Não foi possível obter o seu IP externo.")
             return
+    elif option == "2":
+        ip_address = input("Digite o endereço IP para obter informações de geolocalização: ")
     else:
-        ip_address = input("Digite o endereço IP: ")
+        print("Opção inválida.")
+        return
     
     geolocation_data = get_ip_geolocation(ip_address)
     
