@@ -1,17 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
-import socket
-
-def get_external_ip_meuip():
-    try:
-        url = "https://meuip.com.br/"
-        response = requests.get(url)
-        soup = BeautifulSoup(response.content, 'html.parser')
-        ip_address = soup.find('span', {'class': 'meuip-val'}).get_text()
-        return ip_address
-    except Exception as e:
-        print("Não foi possível obter o endereço IP externo:", e)
-        return None
 
 def get_ip_geolocation(ip_address):
     url = f"https://ipinfo.io/{ip_address}/json"
@@ -19,22 +6,7 @@ def get_ip_geolocation(ip_address):
     data = response.json()
     return data
 
-def main():
-    option = input("Escolha uma opção:\n1 - Usar meu IP público\n2 - Inserir manualmente um endereço IP\nDigite o número da opção: ")
-
-    if option == "1":
-        ip_address = get_external_ip_meuip()
-        if ip_address is None:
-            print("Não foi possível obter o seu IP externo.")
-            return
-    elif option == "2":
-        ip_address = input("Digite o endereço IP para obter informações de geolocalização: ")
-    else:
-        print("Opção inválida.")
-        return
-    
-    geolocation_data = get_ip_geolocation(ip_address)
-    
+def display_geolocation_info(geolocation_data):
     print("\nInformações de Geolocalização:")
     print(f"IP: {geolocation_data['ip']}")
     print(f"Hostname: {geolocation_data['hostname']}")
@@ -43,6 +15,12 @@ def main():
     print(f"País: {geolocation_data['country']}")
     print(f"Provedor de Serviços: {geolocation_data['org']}")
     print(f"Latitude/Longitude: {geolocation_data['loc']}")
+
+def main():
+    ip_address = input("Digite o endereço IP para obter informações de geolocalização: ")
+    
+    geolocation_data = get_ip_geolocation(ip_address)
+    display_geolocation_info(geolocation_data)
 
 if __name__ == "__main__":
     main()
