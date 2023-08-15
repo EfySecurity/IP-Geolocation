@@ -14,9 +14,17 @@ pip install requests
 
 ## Como usar
 
-1. Clone ou baixe este repositório para o seu computador.
+1. Clone ou baixe este repositório no seu terminal.
 
-2. Abra um terminal ou prompt de comando e navegue até o diretório onde o script `ip_geolocation.py` está localizado.
+```bash
+git clone https://github.com/EfySecurity/IP-Geolocation
+```
+
+2. Navegue até o diretório onde o script `ip_geolocation.py` está localizado.
+
+```bash
+cd IP-Geolocation
+```
 
 3. Execute o script usando o seguinte comando:
 
