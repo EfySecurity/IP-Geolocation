@@ -1,13 +1,13 @@
 import requests
+from bs4 import BeautifulSoup
 import socket
 
-def get_external_ip():
+def get_external_ip_meuip():
     try:
-        # Conexão com um servidor externo para determinar o IP público
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        ip_address = s.getsockname()[0]
-        s.close()
+        url = "https://meuip.com.br/"
+        response = requests.get(url)
+        soup = BeautifulSoup(response.content, 'html.parser')
+        ip_address = soup.find('span', {'class': 'meuip-val'}).get_text()
         return ip_address
     except Exception as e:
         print("Não foi possível obter o endereço IP externo:", e)
@@ -23,7 +23,7 @@ def main():
     option = input("Escolha uma opção:\n1 - Usar meu IP público\n2 - Inserir manualmente um endereço IP\nDigite o número da opção: ")
 
     if option == "1":
-        ip_address = get_external_ip()
+        ip_address = get_external_ip_meuip()
         if ip_address is None:
             print("Não foi possível obter o seu IP externo.")
             return
