@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="https://www.python.org/static/community_logos/python-logo-generic.svg" alt="python-logo-generic.svg">
+</div>
+
 # IP Geolocation
 
 Este é um script Python simples para obter informações de geolocalização com base em um endereço IP.
@@ -48,4 +52,10 @@ python ip_geolocation.py
 
 ## Autor
 
-Efy Security
+Nome: Efy Security
+
+Email: efy.security@proton.me
+
+## Licença
+
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
